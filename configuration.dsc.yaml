@@ -1,135 +1,219 @@
 # yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
-properties:  
-    configurationVersion: 0.2.0
-    
-    resources:
-      - resource: Microsoft.Windows.Developer/DeveloperMode
-        directives:
-          description: Enable Developer Mode
-          allowPrerelease: true
-        settings:
-          Ensure: Present
+properties:
+  configurationVersion: 0.2.0
 
-      - resource: Microsoft.WinGet.DSC/WinGetPackage
-        directives:
-            description: Install git
-        settings:
-            id: Git.Git
-            source: winget
+  resources:
+    - resource: Microsoft.Windows.Developer/DeveloperMode
+      id: devMode
+      directives:
+        description: Enable Developer Mode
+        allowPrerelease: true
+      settings:
+        Ensure: Present
 
-      - resource: Microsoft.WinGet.DSC/WinGetPackage
-        id: vsPackage
-        directives:
-          description: Install Visual Studio 2022 Community (Preview)
-        settings:
-          id: Microsoft.VisualStudio.2022.Community.Preview
-          source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: gitPackage
+      directives:
+        description: Install git
+      settings:
+        id: Git.Git
+        source: winget
 
-      - resource: Microsoft.VisualStudio.DSC/VSComponents
-        dependsOn:
-          - vsPackage
-        directives:
-          description: Install required VS workloads from vsconfig file
-        settings:
-          productId: Microsoft.VisualStudio.2022.Community
-          channelId: VisualStudio.17.Preview
-          vsConfigFile: '${WinGetConfigRoot}\.vsconfig'
-          includeRecommended: true
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: vsPackage
+      directives:
+        description: Install Visual Studio 2022 Community (Preview)
+      settings:
+        id: Microsoft.VisualStudio.2022.Community.Preview
+        source: winget
 
-      - resource: Microsoft.WinGet.DSC/WinGetPackage
-        directives:
-            description: Install Docker Desktop
-        settings:
-            id: Docker.DockerDesktop
-            source: winget
+    - resource: Microsoft.VisualStudio.DSC/VSComponents
+      id: vsConfig
+      dependsOn:
+        - vsPackage
+      directives:
+        description: Install required VS workloads from vsconfig file
+        allowPrerelease: true
+      settings:
+        productId: Microsoft.VisualStudio.Product.Community
+        channelId: VisualStudio.17.Preview
+        vsConfigFile: "${WinGetConfigRoot}/.vsconfig"
+        includeRecommended: true
+        allowUnsignedExtensions: true
 
-      - resource: Microsoft.WinGet.DSC/WinGetPackage
-        directives:
-            description: Install Azure Developer CLI
-        settings:
-            id: Microsoft.Azd
-            source: winget
+    - resource: Microsoft.Windows.Developer/Taskbar
+      id: taskbarConfig
+      directives:
+        description: Modify taskbar settings
+        allowPrerelease: true
+      settings:
+        Alignment: Middle
+        HideLabelsMode: WhenFull
+        SearchBoxMode: ShowIconOnly
+        RestartExplorer: True
 
-      - resource: Microsoft.WinGet.DSC/WinGetPackage
-        directives:
-            description: Install PowerToys
-        settings:
-            id: Microsoft.PowerToys
-            source: winget
+    - resource: Microsoft.Windows.Developer/WindowsExplorer
+      id: explorerConfig
+      directives:
+        description: Modify Windows Explorer settings
+        allowPrerelease: true
+      settings:
+        FileExtensions: Show
+        HiddenFiles: Show
+        ItemCheckBoxes: Hide
+        RestartExplorer: true
 
-      - resource: Microsoft.WinGet.DSC/WinGetPackage
-        directives:
-            description: Install Bitwarden
-        settings:
-            id: Bitwarden.Bitwarden
-            source: winget
+    - resource: Microsoft.Windows.Developer/ShowSecondsInClock
+      id: clockConfig
+      directives:
+        description: Show seconds in clock
+        allowPrerelease: true
+      settings:
+        Ensure: Present
 
-      - resource: Microsoft.WinGet.DSC/WinGetPackage
-        directives:
-            description: Install DBeaver
-        settings:
-            id: dbeaver.dbeaver
-            source: winget
+    - resource: Microsoft.Windows.Developer/EnableDarkMode
+      id: darkModeConfig
+      directives:
+        description: Modify Windows Clock settings
+        allowPrerelease: true
+      settings:
+        Ensure: Present
 
-      - resource: Microsoft.WinGet.DSC/WinGetPackage
-        directives:
-            description: Install PowerShell
-        settings:
-            id: Microsoft.PowerShell
-            source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: dockerPackage
+      directives:
+        description: Install Docker Desktop
+      settings:
+        id: Docker.DockerDesktop
+        source: winget
 
-      - resource: Microsoft.WinGet.DSC/WinGetPackage
-        directives:
-            description: Install Beeper
-        settings:
-            id: Beeper.Beeper
-            source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: azdPackage
+      directives:
+        description: Install Azure Developer CLI
+      settings:
+        id: Microsoft.Azd
+        source: winget
 
-      - resource: Microsoft.WinGet.DSC/WinGetPackage
-        directives:
-            description: Install Insomnia
-        settings:
-            id: Insomnia.Insomnia
-            source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: powertoysPackage
+      directives:
+        description: Install PowerToys
+      settings:
+        id: Microsoft.PowerToys
+        source: winget
 
-      - resource: Microsoft.WinGet.DSC/WinGetPackage
-        directives:
-            description: Install VS Code
-        settings:
-            id: Microsoft.VisualStudioCode
-            source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: bitwardenPackage
+      directives:
+        description: Install Bitwarden
+      settings:
+        id: Bitwarden.Bitwarden
+        source: winget
 
-      - resource: Microsoft.WinGet.DSC/WinGetPackage
-        directives:
-            description: Install Windows Terminal
-        settings:
-            id: Microsoft.WindowsTerminal
-            source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: dbeaverPackage
+      directives:
+        description: Install DBeaver
+      settings:
+        id: dbeaver.dbeaver
+        source: winget
 
-      - resource: Microsoft.WinGet.DSC/WinGetPackage
-        id: nvsPackage
-        directives:
-            description: Install Node Version Switcher
-        settings:
-            id: jasongin.nvs
-            source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: pwshPackage
+      directives:
+        description: Install PowerShell
+      settings:
+        id: Microsoft.PowerShell
+        source: winget
 
-      - resource: PSDscResource/Script
-        dependsOn:
-            - nvsPackage
-        directives:
-            description: Setup Node Version Switcher
-        settings:
-            GetScript:
-            TestScript: return $false
-            SetScript: |
-                nvs add lts
-                nvs link lts
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: beeperPackage
+      directives:
+        description: Install Beeper
+      settings:
+        id: Beeper.Beeper
+        source: winget
 
-      - resource: Microsoft.WinGet.DSC/WinGetPackage
-        id: mkcertPackage
-        directives:
-            description: Install mkcert
-        settings:
-            id: FiloSottile.mkcert
-            source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: insomniaPackage
+      directives:
+        description: Install Insomnia
+      settings:
+        id: Insomnia.Insomnia
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: vscodePackage
+      directives:
+        description: Install VS Code
+      settings:
+        id: Microsoft.VisualStudioCode
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: terminalPackage
+      directives:
+        description: Install Windows Terminal
+      settings:
+        id: Microsoft.WindowsTerminal
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: nvsPackage
+      directives:
+        description: Install Node Version Switcher
+      settings:
+        id: jasongin.nvs
+        source: winget
+
+    - resource: PSDscResources/Script
+      id: nvsConfig
+      dependsOn:
+        - nvsPackage
+      directives:
+        description: Setup Node Version Switcher
+        allowPrerelease: true
+      settings:
+        GetScript: |
+          $version = nvs --version
+          return @{ Version = $version }
+        TestScript: return $false
+        SetScript: |
+          nvs add lts
+          nvs link lts
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: mkcertPackage
+      directives:
+        description: Install mkcert
+      settings:
+        id: FiloSottile.mkcert
+        source: winget
+
+    - resource: PSDscResources/Environment
+      id: setCarootVariable
+      directives:
+        description: Set CAROOT env variable
+        allowPrerelease: true
+      settings:
+        name: CAROOT
+        value: "%LOCALAPPDATA%/mkcert"
+        target:
+          - "Process"
+          - "Machine"
+
+    - resource: PSDscResources/Script
+      id: mkcertConfig
+      dependsOn:
+        - setCarootVariable
+        - mkcertPackage
+      directives:
+        description: Setup mkcert
+        allowPrerelease: true
+      settings:
+        GetScript: |
+          return @{ }
+        TestScript: return $false
+        SetScript: |
+          mkcert --install
