@@ -198,7 +198,7 @@ properties:
         allowPrerelease: true
       settings:
         name: CAROOT
-        value: "%LOCALAPPDATA%/mkcert"
+        value: "%LOCALAPPDATA%\\mkcert"
         target:
           - "Process"
           - "Machine"
@@ -213,7 +213,23 @@ properties:
         allowPrerelease: true
       settings:
         GetScript: |
-          return @{ }
-        TestScript: return $false
+          return @{ Exists = Test-Path -Path "$(mkcert -CAROOT)\*" }
+        TestScript: |
+          return Test-Path -Path "$(mkcert -CAROOT)\*"
         SetScript: |
           mkcert --install
+
+    - resource: PSDscResources/Script
+      id: pwshProfile
+      dependsOn:
+        - pwshVersion
+      directives:
+        description: Setup PowerShell
+        allowPrerelease: true
+      settings:
+        GetScript: |
+          return $PROFILE.CurrentUserAllHost
+        TestScript: |
+          return (Select-String -Path $PROFILE.CurrentUserAllHosts -Pattern '/.pwsh/profile.ps1') -ne $null
+        SetScript: |
+          Add-Content -Path $PROFILE.CurrentUserAllHosts -Value "${WinGetConfigRoot}/.pwsh/profile.ps1"
