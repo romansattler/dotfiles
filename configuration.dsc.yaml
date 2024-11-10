@@ -218,16 +218,3 @@ properties:
           return Test-Path -Path "$(mkcert -CAROOT)\*"
         SetScript: |
           mkcert --install
-
-    - resource: PSDscResources/Script
-      id: pwshProfile
-      directives:
-        description: Setup PowerShell
-        allowPrerelease: true
-      settings:
-        GetScript: |
-          return $PROFILE.CurrentUserAllHost
-        TestScript: |
-          return (Select-String -Path $PROFILE.CurrentUserAllHosts -Pattern '/.pwsh/profile.ps1') -ne $null
-        SetScript: |
-          Add-Content -Path $PROFILE.CurrentUserAllHosts -Value "${WinGetConfigRoot}/.pwsh/profile.ps1"
