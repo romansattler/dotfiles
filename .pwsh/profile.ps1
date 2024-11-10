@@ -3,17 +3,7 @@ $env:POSH_SESSION_DEFAULT_USER = [System.Environment]::UserName
 Import-Module posh-git
 Import-Module Terminal-Icons
 
-if ($IsWindows) {
-   $documentsDir = [Environment]::GetFolderPath("MyDocuments")
-   $configDir = "$documentsDir/powershell"
-}
-elseif ($IsLinux) {
-   $configDir = "~/.powershell"
-}
-else {
-   throw "Platform not supported."
-}
-$themePath = "$configDir/theme.omp.json"
+$themePath = "$HOME/.pwsh/theme.omp.json"
 
 oh-my-posh init pwsh --config $themePath | Invoke-Expression
 
