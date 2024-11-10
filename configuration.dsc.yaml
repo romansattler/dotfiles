@@ -218,3 +218,11 @@ properties:
           return Test-Path -Path "$(mkcert -CAROOT)\*"
         SetScript: |
           mkcert --install
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: vimPackage
+      directives:
+        description: Install vim
+      settings:
+        id: vim.vim
+        source: winget
