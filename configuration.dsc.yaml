@@ -2,20 +2,6 @@
 properties:
   configurationVersion: 0.2.0
 
-  assertions:
-    - resource: PSDscResources/Script
-      id: pwshVersion
-      directives:
-        description: Check PowerShell version
-        allowPrerelease: true
-      settings:
-        GetScript: |
-          return $PSVersionTable
-        TestScript: |
-          return $PSVersionTable.PSCompatibleVersions -contains [version]"7.0"
-        SetScript: |
-          # this resouce is only for assertions
-
   resources:
     - resource: Microsoft.Windows.Developer/DeveloperMode
       id: devMode
