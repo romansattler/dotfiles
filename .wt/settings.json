@@ -2,6 +2,19 @@
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": [
+    {
+        "command": {
+            "action": "copy",
+            "singleLine": false
+        },
+        "id": "User.copy.644BA8F2",
+        "keys": "ctrl+c"
+    },
+    {
+        "command": "paste",
+        "id": "User.paste",
+        "keys": "ctrl+v"
+    },
         {
             "command": {
                 "action": "splitPane",
@@ -15,24 +28,12 @@
             "command": "find",
             "id": "User.find",
             "keys": "ctrl+shift+f"
-        },
-        {
-            "command": "paste",
-            "id": "User.paste",
-            "keys": "ctrl+v"
-        },
-        {
-            "command": {
-                "action": "copy",
-                "singleLine": false
-            },
-            "id": "User.copy.644BA8F2",
-            "keys": "ctrl+c"
         }
     ],
     "alwaysShowNotificationIcon": false,
     "autoHideWindow": false,
     "centerOnLaunch": true,
+    "useAcrylicInTabRow": true,
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
@@ -74,23 +75,30 @@
                 "source": "Windows.Terminal.PowershellCore"
             },
             {
+                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
+                "hidden": true,
+                "name": "Git Bash",
+                "source": "Git"
+            },
+            {
+                "guid": "{28e41457-693e-52a4-aa28-42bed36adc98}",
+                "hidden": true,
+                "name": "Developer Command Prompt for VS 2022 [Preview]",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "colorScheme": "Campbell Powershell",
+                "guid": "{6654088f-f0e6-52e8-af30-f02007157d09}",
+                "hidden": false,
+                "name": "Developer PowerShell for VS 2022 [Preview]",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
                 "colorScheme": "Ubuntu-ColorScheme",
                 "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
                 "hidden": false,
                 "name": "Ubuntu",
                 "source": "Windows.Terminal.Wsl"
-            },
-            {
-                "guid": "{16208362-94fc-5b1f-a491-5b2624d5ab56}",
-                "hidden": true,
-                "name": "Visual Studio Debug Console",
-                "source": "VSDebugConsole"
-            },
-            {
-                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
-                "hidden": true,
-                "name": "Git Bash",
-                "source": "Git"
             }
         ]
     },
@@ -119,6 +127,5 @@
             "yellow": "#A2734C"
         }
     ],
-    "themes": [],
-    "useAcrylicInTabRow": true
+    "themes": []
 }
