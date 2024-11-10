@@ -48,7 +48,7 @@ properties:
         allowPrerelease: true
       settings:
         Alignment: Middle
-        HideLabelsMode: WhenFull
+        HideLabelsMode: Always
         SearchBoxMode: ShowIconOnly
         RestartExplorer: True
 
@@ -218,3 +218,11 @@ properties:
           return Test-Path -Path "$(mkcert -CAROOT)\*"
         SetScript: |
           mkcert --install
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: vimPackage
+      directives:
+        description: Install vim
+      settings:
+        id: vim.vim
+        source: winget
