@@ -221,8 +221,6 @@ properties:
 
     - resource: PSDscResources/Script
       id: pwshProfile
-      dependsOn:
-        - pwshVersion
       directives:
         description: Setup PowerShell
         allowPrerelease: true
