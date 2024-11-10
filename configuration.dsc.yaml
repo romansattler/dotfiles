@@ -48,7 +48,7 @@ properties:
         allowPrerelease: true
       settings:
         Alignment: Middle
-        HideLabelsMode: WhenFull
+        HideLabelsMode: Always
         SearchBoxMode: ShowIconOnly
         RestartExplorer: True
 
