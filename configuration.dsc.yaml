@@ -128,14 +128,6 @@ properties:
         source: winget
 
     - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: beeperPackage
-      directives:
-        description: Install Beeper
-      settings:
-        id: Beeper.Beeper
-        source: winget
-
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: insomniaPackage
       directives:
         description: Install Insomnia
