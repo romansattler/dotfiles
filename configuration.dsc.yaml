@@ -80,11 +80,11 @@ properties:
         Ensure: Present
 
     - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: dockerPackage
+      id: podmanPackage
       directives:
-        description: Install Docker Desktop
+        description: Install Podman Desktop
       settings:
-        id: Docker.DockerDesktop
+        id: RedHat.Podman-Desktop
         source: winget
 
     - resource: Microsoft.WinGet.DSC/WinGetPackage

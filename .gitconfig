@@ -1,0 +1,27 @@
+[alias]
+	review = "!git fetch && git difftool --gui -d --no-symlinks origin/${2:-develop}...origin/$1 #"
+	worktree-from-branch = "!git fetch && git worktree add ../$1 $1 #"
+	worktree-remove-branch = "!git worktree remove ../$1 #"
+	wtb = "worktree-from-branch"
+	wtr = "worktree-remove-branch"
+
+[core]
+	autocrlf = true
+	editor = code --wait
+	longpaths = true
+
+[init]
+	defaultBranch = main
+
+[fetch]
+	prune = true
+
+[worktree]
+	guessRemote = true
+
+[user]
+	name = Roman Sattler
+	email = roman.sattler@gmail.com
+
+[include]
+	path = ~/local.gitconfig
