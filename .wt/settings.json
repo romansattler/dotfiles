@@ -2,19 +2,19 @@
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": [
-    {
-        "command": {
-            "action": "copy",
-            "singleLine": false
+        {
+            "command": {
+                "action": "copy",
+                "singleLine": false
+            },
+            "id": "User.copy.644BA8F2",
+            "keys": "ctrl+c"
         },
-        "id": "User.copy.644BA8F2",
-        "keys": "ctrl+c"
-    },
-    {
-        "command": "paste",
-        "id": "User.paste",
-        "keys": "ctrl+v"
-    },
+        {
+            "command": "paste",
+            "id": "User.paste",
+            "keys": "ctrl+v"
+        },
         {
             "command": {
                 "action": "splitPane",
@@ -68,17 +68,17 @@
                 "source": "Windows.Terminal.Azure"
             },
             {
+                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
+                "hidden": true,
+                "name": "Git Bash",
+                "source": "Git"
+            },
+            {
                 "colorScheme": "Campbell Powershell",
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
                 "name": "PowerShell",
                 "source": "Windows.Terminal.PowershellCore"
-            },
-            {
-                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
-                "hidden": true,
-                "name": "Git Bash",
-                "source": "Git"
             },
             {
                 "guid": "{28e41457-693e-52a4-aa28-42bed36adc98}",
