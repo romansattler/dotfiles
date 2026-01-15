@@ -26,6 +26,8 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
    }
 }
 
+dotnet completions script pwsh | out-String | Invoke-Expression -ErrorAction SilentlyContinue
+
 function Manage-Config {
    git --git-dir "$HOME/.config/" --work-tree $HOME $args
 }
