@@ -4,6 +4,12 @@
 	worktree-remove-branch = "!git worktree remove ../$1 #"
 	wtb = "worktree-from-branch"
 	wtr = "worktree-remove-branch"
+	branch-clean = "!f() { \
+        git fetch -p; \
+        git branch -vv | grep ': gone]' | awk '{print $2}' | xargs -I {} sh -c 'git worktree remove --force {} 2>/dev/null; git branch -D {}'; \
+        git worktree prune; \
+    }; f"
+	bc = "branch-clean"
 
 [core]
 	autocrlf = true
@@ -15,6 +21,7 @@
 
 [fetch]
 	prune = true
+	pruneTags = true
 
 [worktree]
 	guessRemote = true
